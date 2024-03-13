@@ -1,2 +1,15 @@
-package com.example.hibernatereactive.config;public class HibernateReactiveConfig {
+package com.example.hibernatereactive.config;
+
+import jakarta.persistence.Persistence;
+import org.hibernate.reactive.mutiny.Mutiny;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class HibernateReactiveConfig {
+    @Bean
+    public Mutiny.SessionFactory sessionFactory() {
+        return Persistence.createEntityManagerFactory("persistenceUnit").unwrap(Mutiny.SessionFactory.class);
+    }
+
 }
